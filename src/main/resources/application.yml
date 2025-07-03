@@ -6,22 +6,30 @@ server:
 
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/adil_db
-    username: postgres
+    url: jdbc:postgresql://aws-0-eu-west-3.pooler.supabase.com:5432/postgres?sslmode=require
+    username: postgres.piapixhkrfyuyhpreeae
     password: P@s$7gXv!a92LzrT
     driver-class-name: org.postgresql.Driver
     hikari:
       maximum-pool-size: 3
+      connection-timeout: 30000
   sql:
     init:
-      mode: always # you won't do this in prod, I'm just doing this for demo purposes !
+      mode: never
   flyway:
     locations: classpath:db/migration
     enabled: true
-#  security:
-#    user:
-#    name: admin
-#    password: P@s$7gXv!a92LzrT
+    baseline-on-migrate: true
+    validate-on-migrate: true
+    schemas: public
+    default-schema: public
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
 
 logging:
   level:
