@@ -1,0 +1,36 @@
+application:
+  name: adilApp
+
+server:
+  port: 8080
+
+spring:
+  datasource:
+    url: postgresql://postgres:yRgdAniGfYIaRBQcTAkYrGjfSKZPQKQd@tramway.proxy.rlwy.net:46627/railway
+    username: postgres
+    password: yRgdAniGfYIaRBQcTAkYrGjfSKZPQKQd
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      maximum-pool-size: 3
+  sql:
+    init:
+      mode: always # you won't do this in prod, I'm just doing this for demo purposes !
+  flyway:
+    locations: classpath:db/migration
+    enabled: true
+#  security:
+#    user:
+#    name: admin
+#    password: P@s$7gXv!a92LzrT
+
+logging:
+  level:
+    root: info
+    org.springframework.web: debug
+    org.springframework.security: debug
+    org.hibernate.SQL: debug
+    org.hibernate.orm.jdbc.bind: trace
+
+jwt:
+  secret: myVerySecretKeyThatIsAtLeast32CharactersLongForHMAC256Algorithm
+  expiration: 86400000
