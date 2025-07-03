@@ -2,8 +2,7 @@ application:
   name: adilApp
 
 server:
-  port: 8080
-
+  port: ${PORT:8080}
 spring:
   datasource:
     url: jdbc:postgresql://aws-0-eu-west-3.pooler.supabase.com:5432/postgres?sslmode=require
