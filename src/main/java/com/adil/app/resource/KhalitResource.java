@@ -14,7 +14,7 @@ import java.util.List;
 @RequestMapping("/api/v1/khalits")
 @RequiredArgsConstructor
 @Slf4j
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = {"http://localhost:3000","https://v0-simple-ai-ui-design.vercel.app/"} )
 public class KhalitResource {
 
     private final KhalitService khalitService;
