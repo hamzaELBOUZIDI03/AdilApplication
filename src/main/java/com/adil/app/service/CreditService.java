@@ -88,12 +88,11 @@ public class CreditService {
 
     public CreditResponse getAll(int page, int size) {
         log.info("Start service : Retrieving all credits Records with pagination: page={}, size={}", page, size);
-        Page<CreditDTO> credits = creditRepository.findAll(PageRequest.of(page, size))
+
+        Page<CreditDTO> credits = creditRepository.findAllSortedByDateRetourThenId(PageRequest.of(page, size))
                 .map(creditMapper::toCreditDTO);
 
-        Double totalMontant = credits.stream()
-                .mapToDouble(dto -> Optional.ofNullable(dto.getMontant()).orElse(0.0))
-                .sum();
+        Double totalMontant = creditRepository.getTotalMontant();
 
         var coffreFort = coffreFortRepository.findByCoffreName(CoffreNameEnum.CREDIT_NAME_TABLE.getCoffreName())
                 .orElseThrow(() -> new FunctionalException("CoffreFort not found with name : " + CoffreNameEnum.CREDIT_NAME_TABLE.getCoffreName()));

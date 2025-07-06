@@ -1,6 +1,8 @@
 package com.adil.app.repository;
 
 import com.adil.app.domain.Credit;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -17,5 +19,17 @@ public interface CreditRepository extends JpaRepository<Credit, Integer> {
                 AND (:montant IS NULL OR c.montant = :montant)
             """)
     List<Credit> searchByNomOrMontant(@Param("nomComplet") String nomComplet, @Param("montant") Double montant);
+
+    @Query("SELECT COALESCE(SUM(c.montant), 0) FROM Credit c")
+    Double getTotalMontant();
+
+    @Query("""
+            SELECT c FROM Credit c
+            ORDER BY
+                CASE WHEN c.dateRetour IS NULL THEN 1 ELSE 0 END,
+                c.dateRetour ASC,
+                c.id ASC
+            """)
+    Page<Credit> findAllSortedByDateRetourThenId(Pageable pageable);
 
 }

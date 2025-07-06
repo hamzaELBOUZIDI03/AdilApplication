@@ -25,5 +25,6 @@ public class Lkbir {
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "coffre_fort_id", referencedColumnName = "id")
     private CoffreFort coffreFort;
+    private String commentaire;
 
 }

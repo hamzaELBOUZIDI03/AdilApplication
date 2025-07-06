@@ -1,6 +1,5 @@
 package com.adil.app.dto;
 
-import com.adil.app.domain.CoffreFort;
 import jakarta.persistence.Column;
 import lombok.*;
 
@@ -20,5 +19,6 @@ public class KhalitDTO {
     private LocalDate dateSortie;
     private LocalDate dateRetour;
     private CoffreFortDTO coffreFort;
+    private String commentaire;
 
 }

@@ -88,12 +88,11 @@ public class LkbirService {
 
     public LkbirResponse getAll(int page, int size) {
         log.info("Start service : Retrieving all Lkbirs Record with pagination: page={}, size={}", page, size);
-        Page<LkbirDTO> lkbirs = lkbirRepository.findAll(PageRequest.of(page, size))
+
+        Page<LkbirDTO> lkbirs = lkbirRepository.findAllSortedByDateRetourThenId(PageRequest.of(page, size))
                 .map(lkbirMapper::toLkbirDTO);
 
-        Double totalMontant = lkbirs.stream()
-                .mapToDouble(dto -> Optional.ofNullable(dto.getMontant()).orElse(0.0))
-                .sum();
+        Double totalMontant = lkbirRepository.getTotalMontant();
 
         var coffreFort = coffreFortRepository.findByCoffreName(CoffreNameEnum.LKBIR_NAME_TABLE.getCoffreName())
                 .orElseThrow(() -> new FunctionalException("CoffreFort not found with name : " + CoffreNameEnum.LKBIR_NAME_TABLE.getCoffreName()));

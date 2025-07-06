@@ -52,7 +52,7 @@ public class AdilResource {
 
     @GetMapping
     public AdilResponse getAll(@RequestParam(defaultValue = "0") int page,
-                                    @RequestParam(defaultValue = "20") int size) {
+                                    @RequestParam(defaultValue = "30") int size) {
         log.info("Start resource : get all adils");
         AdilResponse response = adilService.getAll(page, size);
         log.info("End resource : get all adils");

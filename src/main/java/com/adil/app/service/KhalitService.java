@@ -95,12 +95,11 @@ public class KhalitService {
 
     public KhalitResponse getAll(int page, int size) {
         log.info("Start service : Retrieving all khalits Records with pagination: page={}, size={}", page, size);
-        Page<KhalitDTO> khalits = khalitRepository.findAll(PageRequest.of(page, size))
+
+        Page<KhalitDTO> khalits = khalitRepository.findAllSortedByDateRetourThenId(PageRequest.of(page, size))
                 .map(khalitMapper::toKhalitDTO);
 
-        Double totalMontant = khalits.stream()
-                .mapToDouble(dto -> Optional.ofNullable(dto.getMontant()).orElse(0.0))
-                .sum();
+        Double totalMontant = khalitRepository.getTotalMontant();
 
         var coffreFort = coffreFortRepository.findByCoffreName(CoffreNameEnum.KHALIT_NAME_TABLE.getCoffreName())
                 .orElseThrow(() -> new FunctionalException("CoffreFort not found with name : " + CoffreNameEnum.KHALIT_NAME_TABLE.getCoffreName()));

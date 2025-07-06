@@ -52,7 +52,7 @@ public class KhalitResource {
 
     @GetMapping
     public KhalitResponse getAll(@RequestParam(defaultValue = "0") int page,
-                                 @RequestParam(defaultValue = "20") int size) {
+                                 @RequestParam(defaultValue = "30") int size) {
         log.info("Start resource : get all khalits");
         KhalitResponse result = khalitService.getAll(page, size);
         log.info("End resource : get all khalits");

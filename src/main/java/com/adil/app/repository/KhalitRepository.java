@@ -1,6 +1,8 @@
 package com.adil.app.repository;
 
 import com.adil.app.domain.Khalit;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -17,4 +19,17 @@ public interface KhalitRepository extends JpaRepository<Khalit, Integer> {
                 AND (:montant IS NULL OR c.montant = :montant)
             """)
     List<Khalit> searchByNomOrMontant(@Param("nomComplet") String nomComplet, @Param("montant") Double montant);
+
+    @Query("SELECT COALESCE(SUM(k.montant), 0) FROM Khalit k")
+    Double getTotalMontant();
+
+    @Query("""
+            SELECT k FROM Khalit k
+            ORDER BY
+                CASE WHEN k.dateRetour IS NULL THEN 1 ELSE 0 END,
+                k.dateRetour ASC,
+                k.id ASC
+            """)
+    Page<Khalit> findAllSortedByDateRetourThenId(Pageable pageable);
+
 }

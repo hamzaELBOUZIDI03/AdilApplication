@@ -88,12 +88,11 @@ public class AdilService {
 
     public AdilResponse getAll(int page, int size) {
         log.info("Start service : Retrieving all adils Records coffre with pagination: page={}, size={}", page, size);
-        Page<AdilDTO> adils = adilRepository.findAll(PageRequest.of(page, size))
+
+        Page<AdilDTO> adils = adilRepository.findAllSortedByDateRetourThenId(PageRequest.of(page, size))
                 .map(adilMapper::toAdilDTO);
 
-        Double totalMontant = adils.stream()
-                .mapToDouble(dto -> Optional.ofNullable(dto.getMontant()).orElse(0.0))
-                .sum();
+        Double totalMontant = adilRepository.getTotalMontant();
 
         var coffreFort = coffreFortRepository.findByCoffreName(CoffreNameEnum.ADIL_NAME_TABLE.getCoffreName())
                 .orElseThrow(() -> new FunctionalException("CoffreFort not found with name : " + CoffreNameEnum.ADIL_NAME_TABLE.getCoffreName()));

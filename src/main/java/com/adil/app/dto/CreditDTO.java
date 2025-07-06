@@ -20,5 +20,6 @@ public class CreditDTO {
     private LocalDate dateSortie;
     private LocalDate dateRetour;
     private CoffreFortDTO coffreFort;
+    private String commentaire;
 
 }
