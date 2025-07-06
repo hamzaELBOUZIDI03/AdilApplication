@@ -17,7 +17,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/v1/credits")
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = {"http://localhost:3000","https://v0-simple-ai-ui-design.vercel.app/"} )
 public class CreditResource {
 
     private final CreditService creditService;

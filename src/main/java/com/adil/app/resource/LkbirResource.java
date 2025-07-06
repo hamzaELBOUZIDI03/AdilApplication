@@ -15,7 +15,7 @@ import java.util.List;
 @RequestMapping("/api/v1/lkbirs")
 @RequiredArgsConstructor
 @Slf4j
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = {"http://localhost:3000","https://v0-simple-ai-ui-design.vercel.app/"} )
 public class LkbirResource {
 
     private final LkbirService lkbirService;
