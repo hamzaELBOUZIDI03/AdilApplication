@@ -5,8 +5,8 @@ server:
   port: ${PORT:8080}
 spring:
   datasource:
-    url: jdbc:postgresql://aws-0-eu-west-3.pooler.supabase.com:5432/postgres?sslmode=require
-    username: postgres.piapixhkrfyuyhpreeae
+    url: jdbc:postgresql://localhost:5432/adil_db
+    username: postgres
     password: P@s$7gXv!a92LzrT
     driver-class-name: org.postgresql.Driver
     hikari:

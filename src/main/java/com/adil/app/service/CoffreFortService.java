@@ -9,6 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.Comparator;
 import java.util.List;
 
 @Service
@@ -41,6 +42,7 @@ public class CoffreFortService {
         var coffres = coffreFortRepository.findAll()
                 .stream()
                 .map(coffreFortMapper::toCoffreFortDTO)
+                .sorted(Comparator.comparing(CoffreFortDTO::getId))
                 .toList();
 
         log.info("End service : Retrieved all CoffreFort, count: {}", coffres.size());
