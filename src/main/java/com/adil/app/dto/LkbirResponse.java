@@ -1,28 +1,20 @@
 package com.adil.app.dto;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 
-import java.time.LocalDate;
 import java.util.List;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
-public class LkbirResponse {
+@SuperBuilder
+public class LkbirResponse extends SharedFieldResponse {
 
     private List<LkbirDTO> elements;
-    private Double rest;
-    private Double coffreTotal;
-    private Double montantConsommee;
-    private LocalDate lastDateModification;
-    private int totalPages;
-    private long totalElements;
-    private int size;
-    private int number;
-    private boolean first;
-    private boolean last;
-    private int numberOfElements;
 
 }
