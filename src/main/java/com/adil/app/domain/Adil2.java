@@ -1,30 +1,18 @@
 package com.adil.app.domain;
 
-import jakarta.persistence.*;
-import lombok.*;
-
-import java.time.LocalDate;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 
 @Table(name = "adil_2")
 @Entity
 @Getter
 @Setter
-@Builder
+@SuperBuilder
 @AllArgsConstructor
-@NoArgsConstructor
-public class Adil2 {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-    private String nomComplet;
-    @Column(nullable = false)
-    private Double montant;
-    private LocalDate dateSortie;
-    private LocalDate dateRetour;
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "coffre_fort_id", referencedColumnName = "id")
-    private CoffreFort coffreFort;
-    private String commentaire;
+public class Adil2 extends SharedField {
 
 }

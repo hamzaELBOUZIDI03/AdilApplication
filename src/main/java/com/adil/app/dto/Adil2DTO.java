@@ -1,24 +1,14 @@
 package com.adil.app.dto;
 
-import jakarta.persistence.Column;
-import lombok.*;
-
-import java.time.LocalDate;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 
 @Getter
 @Setter
-@Builder
-@AllArgsConstructor
+@SuperBuilder
 @NoArgsConstructor
-public class Adil2DTO {
-
-    private Integer id;
-    private String nomComplet;
-    @Column(nullable = false)
-    private Double montant;
-    private LocalDate dateSortie;
-    private LocalDate dateRetour;
-    private CoffreFortDTO coffreFort;
-    private String commentaire;
+public class Adil2DTO extends SharedFieldDTO {
 
 }
